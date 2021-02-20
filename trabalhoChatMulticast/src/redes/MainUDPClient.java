@@ -58,15 +58,14 @@ public class MainUDPClient {
 			System.out.println("Informe o ip do servidor:");
 			ipEscolhido = entrada.next();
 			aSocket = new DatagramSocket();
-			byte[] m = requisicao.getBytes();// oque sera enviado
-			InetAddress aHost = InetAddress.getByName(ipEscolhido); //Para quem quero enviar ou seja aqui vai pegar o endereco (localhost, ou merda e etc)
-			// na linha 23 onde cria o pacote que sera enviado que vai ter, a mensagem que esta no m e args, o endereco e a porta
+			byte[] m = requisicao.getBytes();
+			InetAddress aHost = InetAddress.getByName(ipEscolhido); 
 			DatagramPacket request = new DatagramPacket(m, requisicao.length(), aHost, serverPort);
 			aSocket.send(request);// aqui envia o pacote
 			
 			byte[] buffer = new byte[1000];
 			DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
-			aSocket.receive(reply); // aqui é o bloqueante
+			aSocket.receive(reply); // aqui Ã© o bloqueante
 			message = new String(reply.getData()).trim(); // mensagem respondida
 			
 			System.out.println("Resposta: " + message); // imprime na tela a mensagem recebida
